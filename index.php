@@ -7,7 +7,7 @@
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -43,9 +43,9 @@
     <? }else {?>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php?page=signUp>">SignUp</a>
+                <a class="nav-link" href="index.php?page=signUp">SignUp</a>
             </li> <li class="nav-item">
-                <a class="nav-link" href="index.php?page=signIn>">SignIn</a>
+                <a class="nav-link" href="index.php?page=signIn">SignIn</a>
             </li>
         </ul>
     <?}?>

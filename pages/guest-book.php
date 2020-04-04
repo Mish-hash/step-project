@@ -1,6 +1,6 @@
 <h2>Гостевая книга</h2>
 
-<!-- <?php showReviews() ?> -->
+<?php //showReviews() ?>
 
 <form action="index.php?page=guest-book" method="POST">
     <div class="form-group">
