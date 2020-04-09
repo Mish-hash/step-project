@@ -42,9 +42,9 @@
 
     <? }else {?>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item <?= $page == 'signUp' ? 'active' : '' ?>">
                 <a class="nav-link" href="index.php?page=signUp">SignUp</a>
-            </li> <li class="nav-item">
+            </li> <li class="nav-item <?= $page == 'signIn' ? 'active' : '' ?>">
                 <a class="nav-link" href="index.php?page=signIn">SignIn</a>
             </li>
         </ul>
