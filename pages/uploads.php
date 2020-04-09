@@ -3,6 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
+            <?php showMessage() ?>
             <form action="index.php" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file"> <br>
                 <button class="btn btn-primary" name="action" value="uploadImage">Send</button>

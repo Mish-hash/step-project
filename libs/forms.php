@@ -117,8 +117,8 @@ function saveFile($file, $dir) {
         redirect('uploads');
 
     } 
-    if($file['size'] > 10 * 1024 * 1024) {
-        setMessage('File must be 1Mb', 'danger');
+    if($file['size'] > 1 * 1024 * 1024) {
+        setMessage('File must be 10Mb', 'danger');
         redirect('uploads');
     }
 
