@@ -170,8 +170,22 @@ function sendReview() {
     $str = $name . '|' . $review . '|' . time() . "\r\n";
     $file = fopen('reviews.txt', 'a+');
 
-    fwrite($file, $str);
-    fclose($file);
+    if(!$name) {
+        $errors['name'] = 'Name is required';
+    }
+    if(!$review) {
+        $errors['review'] = 'Review is required';
+    }
+    if($errors) {
+        setSession('oldInput', compact('name', 'review'));
+        setMessage($errors, 'danger');
+    }else {
+        fwrite($file, $str);
+        fclose($file);
+        setMessage('Your review has been success', 'success' );
+    }
+    
+   
     redirect('guest-book');
 }
 

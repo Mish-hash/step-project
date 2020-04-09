@@ -1,6 +1,6 @@
 <h1 class="text-center">Sign-In</h1>
 
-<?php showMessage();?>
+<?php showMessage()?>
 
 <form action="index.php?page=signIn.php" method="POST">
     <div class="form-group">

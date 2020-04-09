@@ -3,8 +3,7 @@
         $_SESSION[$key] = $value;
     }
 
-    function removeSession($key)
-    {
+    function removeSession($key){
         if (issetSession($key)) {
             unset($_SESSION[$key]);
 
@@ -24,8 +23,7 @@
 
     };
 
-    function showMessage()
-    {
+    function showMessage() {
         if (issetSession('message')) {
             extract(getSession('message'));
             if (is_array($text)) {

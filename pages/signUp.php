@@ -1,5 +1,5 @@
 <h1 class = 'text-center'>SignUp</h1>
-<?php showMessage();?>
+<?php showMessage()?>
 <form action="index.php?page=signUp.php" method="POST">
     <div class="form-group">
         <label for="userName">Your Name</label>
