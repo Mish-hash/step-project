@@ -2,6 +2,7 @@
     session_start();
     require_once './libs/session.php';
     require_once './libs/forms.php';
+    require_once './libs/renders.php';
     $menu = require_once 'config/menu.php';
     $page = $_GET['page'] ?? 'home';
 

@@ -189,6 +189,23 @@ function sendReview() {
     redirect('guest-book');
 }
 
+function createDir() {
+    $newDirectory = htmlentities(trim($_POST['newDirectory'] ?? null));
+
+    if(!preg_match("/[0-9A-Za-z]/i", $newDirectory)) {
+        setMessage('wrong input, only latin', 'danger');
+        return;
+    }
+    if(file_exists('images/' . $newDirectory)) {
+        setMessage("Impossible to create category {$newDirectory}, created earlier", 'danger');
+        return;
+    }
+    if(!file_exists('images/' . $newDirectory)) {
+        mkdir('images/' . $newDirectory);
+        setMessage('Create new slider ' . $newDirectory, 'success');
+    }
+}
+
 /* function showReviews() {
 
 } */
