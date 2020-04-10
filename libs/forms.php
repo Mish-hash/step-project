@@ -123,7 +123,7 @@ function saveFile($file, $dir) {
     }
 
     $arrMime = [
-        'image/jpg',
+        'image/webp',
         'image/jpeg',
         'image/gif',
         'image/png',
