@@ -84,7 +84,7 @@ function redirect($page) {
     exit();
 }
 
-function uploadImage() {
+/* function uploadImage() {
     $file = $_FILES['file'] ?? null;
 
     $fName = saveFile($file, 'images');
@@ -94,7 +94,7 @@ function uploadImage() {
         setMessage('File upload', 'success');
         redirect('uploads');
     }
-}
+} */
 
 function resizeImage($path, $w_dest) {
     $src = imagecreatefromjpeg($path);
@@ -106,20 +106,20 @@ function resizeImage($path, $w_dest) {
 
     imagecopyresized( $dest, $src, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src );
 
-    list($dir, $fName) = explode('/', $path);
+    list($dir, $directory, $fName) = explode('/', $path);
     $fName = "{$w_dest}x{$h_dest}_{$fName}";
-    imagejpeg($dest,  $dir . '/' . $fName);
+    imagejpeg($dest,  $dir . '/' . $directory .'/'. $fName);
 }
 
 function saveFile($file, $dir) {
     if(!$file || $file['error'] == 4) {
         setMessage('File is required', 'danger');
-        redirect('uploads');
+        redirect('upload-image');
 
     } 
     if($file['size'] > 1 * 1024 * 1024) {
         setMessage('File must be 10Mb', 'danger');
-        redirect('uploads');
+        redirect('upload-image');
     }
 
     $arrMime = [
@@ -131,7 +131,7 @@ function saveFile($file, $dir) {
 
     if ( !in_array( $file['type'], $arrMime) ) {
         setMessage('File must be image', 'danger');
-        redirect('uploads');
+        redirect('upload-image');
 
     }
 
@@ -159,9 +159,9 @@ function cropImage($path, $size) {
         imagecopyresized( $dest, $src, 0, 0, 0, ($h_src - $w_src) / 2, $size, $size, $w_src, $w_src );
     }
 
-    list($dir, $fName) = explode('/', $path);
+    list($dir, $directory, $fName) = explode('/', $path);
     $fName = "{$size}x{$size}_{$fName}";
-    imagejpeg($dest,  $dir . '/' . $fName);
+    imagejpeg($dest,  $dir . '/' . $directory .'/'. $fName);
 }
 
 function sendReview() {
@@ -203,6 +203,35 @@ function createDir() {
     if(!file_exists('images/' . $newDirectory)) {
         mkdir('images/' . $newDirectory);
         setMessage('Create new slider ' . $newDirectory, 'success');
+    }
+}
+
+function deleteDir() {
+    $delDir = $_POST['delDirectory'];
+    if ($objs = glob('images/' . $delDir."/*")) {
+        foreach($objs as $obj) {
+          is_dir($obj) ? rmdir($obj) : unlink($obj);
+        }
+     }
+    rmdir('images/' . $delDir);
+    setMessage('Delete slider ' . $delDir . ' and all files in.', 'success');
+}
+
+function uploadImage() {
+    $file = $_FILES['file'] ?? null;
+    $directory = $_POST['directory'];
+    if(!$directory) {
+        setMessage('First create category', 'danger');
+        redirect('upload-image');
+        return;
+    }
+
+    $fName = saveFile($file, "images/{$directory}/");
+    if ($fName){
+        cropImage("images/{$directory}/{$fName}", 150);
+        resizeImage("images/{$directory}/{$fName}", 500);
+        setMessage('File upload', 'success');
+        redirect('upload-image');
     }
 }
 

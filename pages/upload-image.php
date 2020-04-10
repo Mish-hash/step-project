@@ -25,10 +25,16 @@
         </div>
         <div class="col-6">
             <div class="card bg-light mb-6" style="max-width: 25rem;">
-                <div class="card-header">Управление изображениями</div>
+                <div class="card-header">Image management</div>
                 <div class="card-body">
                     <h4 class="card-title">Light card title</h4>
-                    <p class="card-text"> e card's content.</p>
+                    <form action="index.php" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="file"> <br>
+                        <select type="text" name="directory" class="form-control" id="directory">
+                            <?php renderLislCategories() ?>
+                        </select> <br>
+                        <button class="btn btn-primary" name="action" value="uploadImage">Send</button>
+                    </form>
                 </div>
             </div>
         </div>
