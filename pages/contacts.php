@@ -15,6 +15,10 @@
         <label for="message">Message</label>
         <textarea class="form-control" name="message" id="message" cols="30" rows="10"></textarea>
     </div>
+    <div class="form-group">
+        <img src="php_images/captcha.php" alt="">
+        <input type="text" name="user-captcha" class="form-control"></input>
+    </div>
     <button class="btn btn-primary" name="action" value="sendMail">Send</button>
 </form>
 

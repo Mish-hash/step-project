@@ -1,8 +1,6 @@
 <h2>Гостевая книга</h2>
 
 <?php showMessage() ?>
-<?php //showReviews() ?>
-
 
 <form action="index.php?page=guest-book" method="POST">
     <div class="form-group">
@@ -21,3 +19,5 @@
     </div>
     <button class="btn btn-primary" name="action" value="sendReview">Send</button>
 </form>
+
+<?php showReviews() ?>

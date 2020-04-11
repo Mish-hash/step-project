@@ -7,9 +7,13 @@ if ($action) {
 function sendMail() {
     $email = htmlentities(trim($_POST['email'] ?? null));
     $message = htmlentities(trim($_POST['message'] ?? null));
+    $userCaptcha = htmlentities(trim($_POST['user-captcha'] ?? null));
     $errors = [];
-    if (!$email) {$errors['email'] = 'Email is required' ;}
-    if (!$message) {$errors['message'] = 'Message is required' ;}
+    if (!$email) {$errors['email'] = 'Email is required';}
+    if (!$message) {$errors['message'] = 'Message is required';}
+    if ($userCaptcha != getSession('captcha')) {
+        $errors['user-captcha'] = 'Captcha is invalid';
+    }
 
     if ($errors) {
         setSession('oldInput', compact('email', 'message'));
@@ -235,8 +239,27 @@ function uploadImage() {
     }
 }
 
-/* function showReviews() {
+function showReviews() {
+    /* $html = file_get_contents('reviews.txt');
+    echo $html; */
+    $reviews = array_reverse( file('reviews.txt') );
+    $limit = 3;
+    $totalPages = ceil( count($reviews) / $limit );
+    $p = $_GET['p'] ?? 0;
+    
+    for($i = $p * $limit; $i < $p * $limit + $limit && $i < count($reviews); $i++ ) {
+        list($name, $message, $time) = explode('|', $reviews[$i]);
+        echo '<div class="border my-2 p-2">';
+        echo '<h5>' . $name . ' --- <span>' . date('d.m.Y H:i', trim($time)) . '</span></h5>';
+        echo '<p>' . $message . '</p>';
+        echo '</div>';
+    }
 
-} */
+    echo '<ul class="pagination">';
+    for($i = 0; $i < $totalPages; $i++) {
+        echo '<li class="page-item ' .( $p == $i ? 'active' : '') . '"><a href="http://lesson2project/index.php?page=guest-book&p='. $i .'" class="page-link">' . ($i+1) . '</a></li>';
+    }
+    echo '</ul>';
+}
 
 
